@@ -1,0 +1,22 @@
+
+.CandleChart {
+  background: $colorBgDark;
+  min-width: 50%;
+  min-height: 500px;
+}
+
+.highcharts-candlestick-series .highcharts-point {
+	stroke: silver !important;
+  /*fill: rgb(244, 91, 91)!important;*/
+  fill: #c50000 !important;
+}
+.highcharts-candlestick-series .highcharts-point-up {
+	stroke: silver !important;
+  /*fill: green !important;*/
+  fill:  #00ac00 !important;
+}
+.highcharts-point .highcharts-color-1 {
+  background-color: rgb(247, 163, 92) !important;
+  fill: rgb(247, 163, 92) !important;
+  stroke: silver !important;
+}

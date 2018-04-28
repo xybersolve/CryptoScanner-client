@@ -1,0 +1,118 @@
+/**
+_colors.scss
+
+    Colors - shared across all modules
+*/
+$gray1: #363636;
+$gray2: #292b2c;
+
+$borderTop: #dee2e6;
+$borderColor: #32383e;
+$borderColor1: #454545;
+$borderColor2: #666666;
+
+$backgroundColor: #212529;
+$backgroundColor: #2f3241;
+$defaultColor: #eeeeee;
+
+$hoverBackgroundColor: #aaa;
+$hoverColor: #222;
+
+$hilightBackground: #ffff99;
+$subduedBackground: #ccc;
+
+$colorBgDark: #181818; 
+$colorBgDarker: #202020;
+$colorBgDarkest: #363636;
+
+$colorBgDark: #181818; 
+$colorBgDark1: #202020;
+$colorBgDark2: #222222;
+$colorBgDark3: #363636;
+$colorBgDark4: #565656;
+
+$colorUiBg: #222;
+$colorUiBgLight: #555;
+$colorUiBgLighter: #aaa;
+$colorUiBgHover: #363636;
+$colorBorder: #181818;
+
+$colorText: #2d2d2d;
+$colorTextLight: #888;
+$colorTextLighter: #aaa;
+$colorTextLightest: #ddd;
+$colorTextBright: #eee;
+
+$colorBgGreen: #005f00;
+$colorBgGreenLight: lighten($colorBgGreen, 5%);
+$colorBgGreenLighter: lighten($colorBgGreenLight, 5%);
+$colorBgGreenLightest: lighten($colorBgGreenLighter, 5%);
+$colorBgYellow: darken(beige, 10%);
+$colorBgRed: #5f0000;
+$colorBgRedLight: lighten($colorBgRed, 10%);
+$colorBgRedLighter: lighten($colorBgRedLight, 10%);
+$colorBgRedLightest: lighten($colorBgRedLighter, 10%);
+
+$iconFill: #aaa;
+$iconStroke: #aaa;
+$iconHeight: 24px;
+$iconWidth: 24px;
+
+/*
+$blue: #007bff;
+$indigo: #6610f2;
+$purple: #6f42c1;
+$pink: #e83e8c;
+$red: #dc3545;
+$yellow: #ffc107;
+$orange: #fd7e14;
+$green: #28a745;
+$teal: #20c997;
+$cyan: #17a2b8;
+$white: #fff;
+$gray: #6c757d;
+$gray-dark: #343a40;
+$primary: #007bff;
+$secondary: #6c757d;
+$success: #28a745;
+$info: #17a2b8;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: #f8f9fa;
+$dark: #343a40;
+*/
+
+/*
+.red-3 {
+  background-color: #d70000;
+  color: white;
+}
+
+.red-2 {
+  background-color: #af0000;
+  color: white;
+}
+
+.red-1 {
+  background-color: #5f0000;
+  color: white;
+}
+
+.green-3 {
+  background-color:  #00af00;
+  color: white;
+}
+.green-2 {
+  background-color:  #008000;
+  color: white;
+}
+.green-1 {
+  background-color:  #005f00;
+  color: white;
+}
+
+.no-color {
+  background-color:  #ffffff;
+  color: #222222;
+}
+*/

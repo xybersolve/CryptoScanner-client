@@ -1,0 +1,135 @@
+/**
+    HotCoins List & Preview (Table)
+*/
+
+/*
+    Table cell colors for dynamic assignment in react 
+*/
+.colorCellNormal {
+  background-color: $colorBgDark;
+  color: $colorTextLighter;
+}
+
+.colorCellGreen {
+  background-color: $colorBgGreen;
+  color: $colorTextBright;
+}
+
+.colorCellGreenLight {
+  background-color: $colorBgGreenLight;
+  color: $colorTextBright;
+}
+
+.colorCellGreenLighter {
+  background-color: $colorBgGreenLighter;
+  color: $colorTextBright;
+}
+
+.colorCellGreenLightest {
+  background-color: $colorBgGreenLightest;
+  color: $colorTextBright;
+}
+
+.colorCellYellow {
+  background-color: $colorBgYellow;
+  color: $colorText;
+}
+
+.colorCellRed {
+  background-color: $colorBgRed;
+  color: $colorTextBright;
+}
+.colorCellRedLight {
+  background-color: $colorBgRedLight;
+  color: $colorTextBright;
+}
+
+.colorCellRedLighter {
+  background-color: $colorBgRedLighter;
+  color: $colorTextBright;
+}
+
+.colorCellRedLightest {
+  background-color: $colorBgRedLightest;
+  color: $colorTextBright;
+}
+
+/*
+  Static table styles
+*/
+%table-full {
+  border-collapse: collapse;
+  border: 2px solid #aaa;
+}
+
+table.HotCoinsTable {
+  display: table;
+  @extend %table-full;
+  width: 100%;
+  margin-bottom: 4px;
+  border-spacing: 2px;
+  border-radius: 4px;
+  border: 1px solid #333;
+
+  tr {
+    color: $colorTextLighter;
+    border:2px solid #333;
+
+    &:hover td {
+      border-top:2px solid #666;
+      border-bottom:2px solid #666;
+    }
+
+    th {
+      background: $colorBgDark2;
+      color: $colorTextLighter;
+      padding-left: 4px; 
+      border:2px solid #666;
+      white-space: nowrap;
+      .sortable {
+        background: $colorBgDark2;  
+        color: #ccc;
+        &:hover {
+          background: $colorBgDark3;
+          color: #eee;
+        }
+      }
+    }
+
+    td {
+      border: 1px solid $colorBorder;
+      padding: 8px;
+      line-height: 20px;
+      vertical-align: top;
+      font-weight: normal;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      .pill {
+        height: 20px;
+        margin-left: 6px;
+        padding-left: 6px; 
+        padding-right: 6px;   
+        background-color: #666;
+        color: #ccc;
+        font-size: 14px;
+        font-weight: normal;
+        vertical-align: baseline;
+      }
+    } 
+  
+    .coin-cell {
+      font-weight: bold;
+      text-align: center;
+    }
+  
+    .data-cell {
+      text-align: center;
+    }
+
+    .numeric-cell {
+      text-align: right;
+    }
+  }  
+}

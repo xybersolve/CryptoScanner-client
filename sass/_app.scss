@@ -1,0 +1,101 @@
+/*
+  Primary app Component Styles
+
+*/
+.Header {
+  display: flex;
+  flex-direction: row;
+  background-color: #000;
+  margin: 0;
+  padding: 8 6 8 10;
+  align-items: center;
+
+  .title {
+    margin-right: 8px;
+    margin-left: 10px;
+    font-size: 32px;
+    font-weight: bold;
+    color: $colorTextLightest;
+  }
+  .pageTitle {
+    margin-left: 8px;
+    font-size: 24px;
+    font-weight: normal;
+    color: $colorTextLighter;
+  }
+
+  .Menu {
+    align-self: flex-end;
+
+    ul {
+      display: flex;
+      flex-flow: row ;
+    }
+  }
+
+}
+
+%button-common {
+  background-color: #363636;
+  color: #ddd;  
+}
+
+/**
+    HotCoins Toolbar
+*/
+.HotCoins {
+  min-width: 50%;
+  background-color: $colorUiBg;
+  color: $colorText;
+}
+
+.HotCoinToolbar {
+  @extend %common-panel;
+  transition: all 1s;
+  background: $colorBgDark2;
+  height: 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  padding-left: 0;
+  margin-left: 0;
+ 
+  button {
+    width: 160px;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    border-left: 1px solid $borderColor1;
+    border-right: 1px solid $borderColor1;
+    background-color: $colorBgDark3;
+    color: $colorTextLight;
+    outline: 0;
+    transition: all .5s;
+    cursor: point;
+    &:hover {
+      border-left-color: $borderColor2;
+      border-right-color: $borderColor2; 
+      background-color: $colorBgDark4;
+      color: $colorTextLightest;
+    }
+  }  
+}
+
+.HotCoinOptions {
+  transition: height .5s ease-in-out;
+  border: 0;
+  border-top: 1px solid $borderColor;
+  border-bottom: 1px solid $borderColor;
+  height: 0; padding: 0; margin: 0;
+  background-color: $colorBgDark2;
+  color: $colorTextLighter;
+  overflow: hidden;
+
+  &.show {
+    transition: height .5s ease-in-out;
+    height: 350px;
+  } 
+
+}
+
+

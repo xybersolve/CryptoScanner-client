@@ -1,0 +1,259 @@
+/*
+  _layout.scss
+
+    Workbench for app CSS
+*/
+
+
+.colorNormal {
+  background-color: $colorBgDark;
+  color: $colorTextLighter;
+}
+
+.colorGreen {
+  background-color: $colorBgGreen;
+  color: $colorTextBright;
+}
+
+.colorGreenLight {
+  background-color: $colorBgGreenLight;
+  color: $colorTextBright;
+}
+
+.colorGreenLighter {
+  background-color: $colorBgGreenLighter;
+  color: $colorTextBright;
+}
+
+.colorGreenLightest {
+  background-color: $colorBgGreenLightest;
+  color: $colorTextBright;
+}
+
+.colorYellow {
+  background-color: $colorBgYellow;
+  color: $colorText;
+}
+
+.colorRed {
+  background-color: $colorBgRed;
+  color: $colorTextBright;
+}
+.colorRedLight {
+  background-color: $colorBgRedLight;
+  color: $colorTextBright;
+}
+
+.colorRedLighter {
+  background-color: $colorBgRedLighter;
+  color: $colorTextBright;
+}
+
+.colorRedLightest {
+  background-color: $colorBgRedLightest;
+  color: $colorTextBright;
+}
+
+%thNumeric {
+  height: 15px;
+  width: 80px;
+  text-align: right;
+  padding: 4px;
+}
+
+%thText {
+  height: 15px;
+  width: 80px;
+  text-align: center;
+  padding: 4px;
+}
+
+%tdNumeric {
+  height: 15px;
+  text-align: right;
+  padding: 4px;
+}
+
+%tdText {
+  height: 15px;
+  text-align: center;
+  padding: 4px;
+}
+
+@mixin tab-borders($color, $radius) {
+  border-radius: 0;
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+  border-top: 1px solid $color;
+  border-left: 1px solid $color;
+  border-right: 1px solid $color;
+  border-bottom: 0;
+}
+
+@mixin tab-active($color) {
+  $curColor: lighten($color, 20%);
+  border-top: 1px solid $curColor;
+  border-left: 1px solid $curColor;
+  border-right: 1px solid $curColor;
+  color: $colorTextBright;
+}
+
+#layout {
+  background: $colorBgDarkest;
+  display: flex;
+  flex-direction: column;
+
+  header {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;  
+    @extend %common-panel;  
+    background: $colorBgDark;
+    
+    .app-title {
+      align-self: center;
+      margin-left: 6px;
+      font-size: 24px;
+    }
+
+    #tabbar {
+      margin-left:100px;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      button {
+        @include tab-borders($borderColor1, 8px);
+        margin-left:3px;
+        margin-top: 16px;        
+        outline: none;
+        padding-left: 25px;
+        padding-right: 25px;
+        background-color: $colorBgDark2;
+        color: $colorTextLighter;
+        font-size: 18px;
+        font-weight: normal;
+        
+        &.active {
+          @include tab-active($borderColor1);
+        }
+
+        &:hover {
+          background-color: $colorBgDark4;
+        }
+      } 
+    }
+
+  }
+  #toolbar {
+    @extend %common-panel;
+    background: $colorBgDark2;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 10px;
+
+    button {
+      border: 1px solid $borderColor1;
+      border-radius: 6px;
+      height: 35px;
+      background: $colorUiBg;
+      color: $colorTextLight;
+      margin-left: 8px;
+      vertical-align: center;
+      outline: none;
+      box-shadow: inset 0 1px 0 #888;
+      transition: all 0.3s;
+      cursor: point;
+      &:hover {
+        background: $colorUiBgHover;
+        color: $colorTextLighter;
+      }
+    }
+  }
+  #options {
+    @extend %common-panel;
+    background: $colorBgDark3;
+    height: 50px;
+  }
+  #main {
+    background: $colorBgDark;
+    #table {
+      @extend %common-panel;
+      background: $colorBgDark2;
+      height: 500px;
+    }
+  
+    #chart {
+      @extend %common-panel;
+      background: $colorBgDark3;
+      height: 500px;
+    }
+  }
+  footer {
+    @extend %common-panel;
+    background: $colorBgDark2;
+  }
+  table {
+    border-collapse: separate;
+    border-color: #ddd;
+    display: table;
+
+    th {
+      background: $colorBgDark2;
+      color: $colorTextLight;
+    }
+    tr {
+      color: $colorTextLighter;
+      td {
+        &:first-child {
+          @extend .colorNormal;
+          @extend %tdText;
+        }
+        &:nth-child(2) {
+          @extend .colorNormal;
+          @extend %tdText;
+        }
+        &:nth-child(3) {
+          @extend .colorNormal;
+          @extend %tdText;
+        }
+        &:nth-child(4) {
+          @extend .colorGreenLightest;
+          @extend %tdNumeric;
+        }
+        &:nth-child(5) {
+          @extend .colorGreenLighter;
+          @extend %tdNumeric;
+        }
+        &:nth-child(6) {
+          @extend .colorGreenLight;
+          @extend %tdNumeric;
+        }
+        &:nth-child(7) {
+          @extend .colorYellow;
+          @extend %tdNumeric;
+        }
+        &:nth-child(8) {
+          @extend .colorRed;
+          @extend %tdNumeric;
+        }
+        &:nth-child(9) {
+          @extend .colorRedLight;
+          @extend %tdNumeric;
+        }
+        &:nth-child(10) {
+          @extend .colorRedLighter;
+          @extend %tdNumeric;
+        }
+        &:nth-child(11) {
+          @extend .colorNormal;
+          @extend %tdText;
+        }
+        
+      }  
+    }
+    
+  }
+}
+

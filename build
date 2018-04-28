@@ -1,0 +1,221 @@
+#!/usr/bin/env bash
+# ================================================================
+# -*- mode: bash -*-
+# vi: set ft=sh
+# ****************************************************************
+#
+# DESCRIPTION
+#    Build script for CryptoScanner
+#      * builds builder image, pushed it to ECS Registry
+#      * builds app artfiacts
+#
+# SYNTAX & EXAMPLES
+#    See 'SYNTAX' (below)
+#
+# ----------------------------------------------------------------
+# IMPLEMENTATION
+#    version         script 0.0.4
+#    author          Greg Milligan
+#    copyright       Copyright (c) 2017 http://www.xybersolve.com
+#    license         GNU General Public License
+#
+# ================================================================
+#  DEBUG OPTION
+#    set -n  # Uncomment to check your syntax, without execution.
+#    set -x  # Uncomment to debug this shell script
+#
+# ---------------------------------------------------------------
+#
+# TODO:
+# ****************************************************************
+
+
+# ---------------------------------------
+# CONFIGFURATION
+# ---------------------------------------
+# strict environment
+set -o errexit  # exit on command error status
+set -o nounset  # no unreadonlyd variables
+set -o pipefail # failr on pipe failures
+trap 'echo "Aborting due to errexit on line $LINENO. Exit code: ${?}" >&2' ERR
+
+# ---------------------------------------
+# GLOBAL VARIABLES
+# ---------------------------------------
+# booleans
+declare -ir TRUE=1
+declare -ir FALSE=0
+# script info
+
+declare -r PROGNAME="$(basename ${0})"
+declare -r VERSION=0.0.1
+declare -r SUBJECT=""
+declare -r KEYS=""
+declare -ri MIN_ARG_COUNT=1
+declare -r SYNTAX=$(cat <<EOF
+
+    Script: ${PROGNAME}
+    Purpose:
+    Usage: ${PROGNAME} [-h|--help] [-v|--version]
+
+    Options:
+      -h|--help:  help and usage
+      -v| --version: show version info
+      --builder:    build the builder image, push to ECS registry
+      --build:      build the app artifacts
+      --app:        build the app container, push to ECS registry
+
+    Examples:
+      ${PROGNAME} --builder
+      ${PROGNAME} --build
+      ${PROGNAME} --app
+      ${PROGNAME} --builder --build --app
+EOF
+)
+# files & directories
+declare -r SCRIPT_DIR="$( dirname ${0} )"
+
+# actions
+declare -i LOGIN=${FALSE}
+declare -i ACTIVATE=${FALSE}
+declare -i BUILD_BUILDER=${FALSE}
+declare -i BUILD_APP=${FALSE}
+
+# script globals
+declare -r AWS_REGION='us-west-2'
+declare -r GIT_HASH="$(git rev-parse HEAD)"
+declare -r REPO='734741078887.dkr.ecr.us-west-2.amazonaws.com'
+declare -r BUILDER='crypto-scanner-builder'
+declare -r BUILDER_FILE='Dockerfile.builder'
+declare -r BUILDER_PATH="${REPO}/${BUILDER}:${GIT_HASH}"
+declare -r APP='crypto-scanner'
+declare -r APP_FILE='Dockerfile'
+declare -r APP_PATH="${REPO}/${APP}:${GIT_HASH}"
+
+# ---------------------------------------
+# COMMON FUNCTIONS
+# ---------------------------------------
+usage() {
+  echo "${SYNTAX}"
+}
+
+error() {
+  printf "\n%s\n" "Error: ${1}"
+}
+
+die() {
+  error "${1}"
+  usage
+  printf "\n\n"
+  exit "${2:-1}"
+}
+
+show_version() {
+  printf "\n\n%s  %s\n\n\n" "${PROGNAME}" "${VERSION}"
+  exit 0
+}
+
+show_help() {
+  printf "\n\n"
+  usage
+  printf "\n\n"
+  exit 0
+}
+
+# ---------------------------------------
+# MAIN ROUTINES
+# ---------------------------------------
+__activate() {
+  set +o errexit
+  set +o nounset
+  set +o pipefail
+
+  . ../bin/activate
+
+  set -o errexit
+  set -o nounset
+  set -o pipefail
+}
+
+__login() {
+  aws ecr get-login --no-include-email --region us-west-2 | bash
+}
+
+__build_builder() {
+  #docker build -t "${REPO}/${BUILDER}:${GIT_HASH}" -f "${BUILDER_FILE}" .
+  docker build -t "${BUILDER_PATH}" -f "${BUILDER_FILE}" .
+  docker push "${BUILDER_PATH}"
+}
+
+__build_app() {
+  # pulls builder image from registry, using it to build React app
+  #docker run --rm -v "${PWD}:/work" "${BUILDER_PATH}" bash -c "cd /work; npm run build:prod"
+  docker run --rm \
+    -v "${PWD}:/work" \
+    "${BUILDER_PATH}" \
+    bash -c "cd /work; npm run build:prod"
+}
+
+__app() {
+  docker build -t "${APP_PATH}" -f "${APP_FILE}" .
+  docker push "${APP_PATH}"
+}
+
+__list_repos() {
+  aws ecr describe-repositories
+}
+
+__list_images() {
+  local repo="${1}"
+  aws ecr --region "${AWS_REGION}" list-images --repository-name "${repo}"
+}
+
+__get_opts() {
+  while (( $# > 0 )); do
+    local arg="${1}"; shift;
+    case ${arg} in
+      --help)    show_help                ;;
+      --version) show_version             ;;
+      --builder)
+        ACTIVATE=${TRUE}
+        LOGIN=${TRUE}
+        BUILD_BUILDER=${TRUE}
+        ;;
+      --build)
+        ACTIVATE=${TRUE}
+        LOGIN=${TRUE}
+        BUILD_APP=${TRUE}
+        ;;
+      --app)
+        ACTIVATE=${TRUE}
+        LOGIN=${TRUE}
+        APP=${TRUE}
+        ;;
+      --list-builders)
+        __list_images 'crypto-scanner-builder'  ;;
+      *)
+        die "Unknown option: ${arg}" 2
+      ;;
+   esac
+  done
+  return 0
+}
+
+__dispatch() {
+  (( ACTIVATE )) && __activate
+  (( LOGIN )) && __login
+  (( BUILD_BUILDER )) && __build_builder
+  (( BUILD_APP )) && __build_app
+  (( APP )) && __app
+  return 0
+}
+
+main() {
+  (( ${#} < MIN_ARG_COUNT )) && die "Expects at least ${MIN_ARG_COUNT} arguments" 1
+  (( $# > 0 )) && __get_opts "$@"
+
+  __dispatch
+
+  return 0
+}
+(( ${#} > 0 )) && main "${@}" || main

@@ -1,0 +1,29 @@
+.toggle {
+  width: 160px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  border-left: 1px solid $borderColor1;
+  border-right: 1px solid $borderColor1;
+  background-color: $colorBgDark3;
+  color: $colorTextLight;
+  outline: 0;
+  transition: all .5s;
+  cursor: point;
+  &:hover {
+    border-left-color: $borderColor2;
+    border-right-color: $borderColor2; 
+    background-color: $colorBgDark4;
+    color: $colorTextLightest;
+  }
+  .enabled {
+    box-shadow: inset 2px 2px 2px 1px #222;
+    background-color: $colorBgDark4;
+    color: #eee;
+  }
+  div {
+    height: 100%;
+    width: 100%;
+  }
+}
+

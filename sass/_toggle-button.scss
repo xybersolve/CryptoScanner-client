@@ -1,0 +1,51 @@
+
+
+ button {
+  width: 160px;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  border-left: 1px solid $borderColor1;
+  border-right: 1px solid $borderColor1;
+  background-color: $colorBgDark3;
+  color: $colorTextLight;
+  outline: 0;
+  transition: all .5s;
+  cursor: point;
+  &:hover {
+    border-left-color: $borderColor2;
+    border-right-color: $borderColor2; 
+    background-color: $colorBgDark4;
+    color: $colorTextLightest;
+  }
+ }
+
+ 
+ button {
+    width: 160px;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    border-left: 1px solid $borderColor1;
+    border-right: 1px solid $borderColor1;
+    background-color: $colorBgDark3;
+    color: $colorTextLight;
+    outline: 0;
+
+    transition: all .5s;
+    cursor: point;
+    &:hover {
+      border-left-color: $borderColor2;
+      border-right-color: $borderColor2; 
+      background-color: $colorBgDark4;
+      color: $colorTextLightest;
+    }
+    .toggle-on {
+      background-color: $colorBgDark2;
+      color: $colorTextLightest;
+    }
+    .toggle-off {
+      background-color: $colorBgDark3;
+    }
+    
+ }

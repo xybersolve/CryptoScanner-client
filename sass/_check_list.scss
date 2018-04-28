@@ -1,0 +1,35 @@
+/*
+  _check_list.scss
+
+  React reusable CheckList component styling
+  * stripped odd/even rows
+  * borders
+*/
+
+ul.CheckList {
+  list-style-type: none;
+  margin: 0;padding:0; 
+  background: #333;
+  border: 1px solid #666; 
+  width: 100%;
+
+  li {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    min-height: 25px;    
+    padding: 6px 6px;
+    margin: 0;
+    border: 0;
+    /* border-bottom: 1px solid #444; */
+    &:nth-child(odd) {
+      background-color: #323232;
+      color: #ddd;
+    }
+    &:nth-child(even) {
+      background-color: #232323;
+      color: #ddd;
+    }
+
+  }
+}
