@@ -32,3 +32,6 @@ node_modules/
 # ancillary
 /research
 /archives
+
+# project
+build.conf.sh

@@ -74,6 +74,9 @@ EOF
 )
 # files & directories
 declare -r SCRIPT_DIR="$( dirname ${0} )"
+declare -r CONFIG_FILE="${SCRIPT_DIR}/build.conf.sh"
+# pull variables from config
+source "${CONFIG_FILE}" || die "Uable to load config file: ${CONFIG_FILE}" 1
 
 # actions
 declare -i LOGIN=${FALSE}
@@ -82,9 +85,7 @@ declare -i BUILD_BUILDER=${FALSE}
 declare -i BUILD_APP=${FALSE}
 
 # script globals
-declare -r AWS_REGION='us-west-2'
 declare -r GIT_HASH="$(git rev-parse HEAD)"
-declare -r REPO='734741078887.dkr.ecr.us-west-2.amazonaws.com'
 declare -r BUILDER='crypto-scanner-builder'
 declare -r BUILDER_FILE='Dockerfile.builder'
 declare -r BUILDER_PATH="${REPO}/${BUILDER}:${GIT_HASH}"
@@ -125,6 +126,7 @@ show_help() {
 # ---------------------------------------
 # MAIN ROUTINES
 # ---------------------------------------
+
 __activate() {
   set +o errexit
   set +o nounset
