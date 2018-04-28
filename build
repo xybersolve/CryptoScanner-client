@@ -76,7 +76,7 @@ EOF
 declare -r SCRIPT_DIR="$( dirname ${0} )"
 declare -r CONFIG_FILE="${SCRIPT_DIR}/build.conf.sh"
 # pull variables from config
-source "${CONFIG_FILE}" || die "Uable to load config file: ${CONFIG_FILE}" 1
+source "${CONFIG_FILE}" || die "Unable to load config file: ${CONFIG_FILE}" 1
 
 # actions
 declare -i LOGIN=${FALSE}
