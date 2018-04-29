@@ -1,8 +1,12 @@
 {
   "name": "@xybersolve/CryptoScanner.client",
   "version": "1.0.0",
-  "description": "",
+  "description": "Frontend (only): Scans online cryptocurrency trading resources to find high volume moves. Looks for price breakouts.",
   "main": "index.js",
+  "repository": {
+    "type":"git",
+    "url": "http://github.com/xybersolve/CryptoScanner-client.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "http-server": "http-server ./public",

@@ -22,8 +22,8 @@ builder:
 	@echo "Build builder image"
 	#docker build -t "$(repo)/$(builder):$(githash)" -f "$(builder_file)" .
 	docker build -t "$(builder_path)" -f "$(builder_file)" .
-	#@echo "Tag builder image"
-	#docker tag $(builder_path):$(builder_path) $(builder_path)
+	@echo "Tag builder image"
+	docker tag $(builder_path):$(builder_path) $(builder_path)
 	@echo "Push builder image"
 	docker push $(builder_path)
 
