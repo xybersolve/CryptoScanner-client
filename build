@@ -88,6 +88,7 @@ declare -i BUILD_APP=${FALSE}
 declare -r GIT_HASH="$(git rev-parse HEAD)"
 declare -r BUILDER='crypto-scanner-builder'
 declare -r BUILDER_FILE='Dockerfile.builder'
+declare -r BUILDER_TAG="${BUILDER}:${GIT_HASH}"
 declare -r BUILDER_PATH="${REPO}/${BUILDER}:${GIT_HASH}"
 declare -r APP='crypto-scanner'
 declare -r APP_FILE='Dockerfile'
@@ -146,6 +147,7 @@ __login() {
 __build_builder() {
   #docker build -t "${REPO}/${BUILDER}:${GIT_HASH}" -f "${BUILDER_FILE}" .
   docker build -t "${BUILDER_PATH}" -f "${BUILDER_FILE}" .
+  docker tag "${BUILDER_TAG}" "${BUILDER_PATH}"
   docker push "${BUILDER_PATH}"
 }
 
